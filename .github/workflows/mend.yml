@@ -20,8 +20,10 @@ jobs:
         run: Rscript -e 'install.packages("packrat", repos="https://cloud.r-project.org")'
         
       - name: Restore Packrat / install packages
-        run: Rscript -e 'packrat::restore()'
-        
+        run: |
+          Rscript -e 'install.packages("remotes", repos = "https://cloud.r-project.org")'
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
+
       - name: Mend CLI Scan
         env:
           MEND_EMAIL: ${{secrets.MEND_EMAIL}}
