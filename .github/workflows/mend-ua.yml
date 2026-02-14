@@ -16,11 +16,20 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libudunits2-dev
           
+      - name: Install Packrat
+        run: Rscript -e 'install.packages("packrat", repos="https://cloud.r-project.org")'
+        
       - name: Install packages
         run: |
           Rscript -e 'install.packages("remotes", repos = "https://cloud.r-project.org")'
           Rscript -e 'remotes::install_deps(dependencies = TRUE)'
-
+          
+      - name: Restore dependencies
+        run: |
+          Rscript -e 'packrat::init()'
+          Rscript -e 'packrat::snapshot()'
+          Rscript -e 'packrat::restore()'
+        
       - name: Mend CLI Scan
         env:
           MEND_EMAIL: ${{secrets.MEND_EMAIL}}
