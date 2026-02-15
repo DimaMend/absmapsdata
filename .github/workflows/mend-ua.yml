@@ -3,7 +3,7 @@ name: Mend CLI UA
 on: workflow_dispatch
 
 jobs:
-  cli:
+  cli-ua:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,13 +21,9 @@ jobs:
       - name: Install Packrat
         run: Rscript -e 'install.packages("packrat", repos="https://cloud.r-project.org")'
         
-#      - name: Install packages
-#        run: |
-#          Rscript -e 'install.packages("remotes", repos = "https://cloud.r-project.org")'
-#          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
-          
       - name: Restore dependencies
         run: |
+          # Create the packrat/packrat.lock file that is missing from the project.
           Rscript -e 'packrat::init()'
           Rscript -e 'packrat::snapshot()'
           Rscript -e 'packrat::restore()'
