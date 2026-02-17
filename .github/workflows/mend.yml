@@ -26,7 +26,7 @@ jobs:
           # Create the packrat/packrat.lock file that is missing from the project.
           # Rscript -e 'packrat::init()'
           Rscript -e 'packrat::snapshot()'
-          Rscript -e 'packrat::restore()'
+          # Rscript -e 'packrat::restore()'
 
       - name: Mend CLI Scan
         env:
