@@ -18,8 +18,8 @@ jobs:
           sudo apt update
           sudo apt install gdal-bin libgdal-dev
           
-#      - name: Install Packrat
-#        run: Rscript -e 'install.packages("packrat", repos="https://cloud.r-project.org")'
+      - name: Install Packrat
+        run: Rscript -e 'install.packages("packrat", repos="https://cloud.r-project.org")'
         
       - name: Set up Packrat for the project
         run: |
