@@ -18,15 +18,13 @@ jobs:
           sudo apt update
           sudo apt install gdal-bin libgdal-dev
           
-      - name: Install Packrat
-        run: Rscript -e 'install.packages("packrat", repos="https://cloud.r-project.org")'
+#      - name: Install Packrat
+#        run: Rscript -e 'install.packages("packrat", repos="https://cloud.r-project.org")'
         
-      - name: Restore dependencies
+      - name: Set up Packrat for the project
         run: |
-          # Create the packrat/packrat.lock file that is missing from the project.
+          # packrat::init() calls packrat::restore() internally and creates the packrat/packrat.lock file that is missing from the project.
           Rscript -e 'packrat::init()'
-          # Rscript -e 'packrat::snapshot()'
-          # Rscript -e 'packrat::restore()'
 
       - name: Mend CLI Scan
         env:
