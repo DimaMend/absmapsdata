@@ -21,12 +21,11 @@ jobs:
       - name: Install Packrat
         run: Rscript -e 'install.packages("packrat", repos="https://cloud.r-project.org")'
         
-      - name: Restore dependencies
+      - name: Set up Packrat for the project
         run: |
-          # Create the packrat/packrat.lock file that is missing from the project.
+          # packrat::init() creates the packrat/packrat.lock file that is missing from the project.
+          # packrat::init() calls packrat::snapshot() internally.
           Rscript -e 'packrat::init()'
-          Rscript -e 'packrat::snapshot()'
-          Rscript -e 'packrat::restore()'
         
       - name: Mend CLI Scan
         env:
